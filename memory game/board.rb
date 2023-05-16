@@ -37,6 +37,14 @@ class Board
     end
     end
 
+    def Reveal(guess)
+     if @grid[guess[0]][guess[1]].face_up?
+        return
+     else
+        @grid[guess[0]][guess[1]].reveal
+     end
+    end
+
     def [](pos)
         row = pos[0]
         col = pos[1]
@@ -73,6 +81,12 @@ class Board
             end
         end
         full
+    end
+
+    def won?
+      @grid.all? do |row|
+        row.all? { |ele| ele.face_up? }
+      end
     end
 
 end
