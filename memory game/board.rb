@@ -11,21 +11,26 @@ class Board
 
     def populate
         @alpha = ("a".."z").to_a
-        # debugger
-        7.times do 
-            value = @alpha.sample
-            rand_row = rand(0...@size)
-            rand_col = rand(0...@size)
-            rand_pos = [rand_row, rand_col]
-            2.times do
-                # if self.valid_position?(rand_pos) && 
-                until self.empty_position?(rand_pos)
+      
+           until self.full?
+                rand_row = rand(0...@size)
+                value = @alpha.sample
+                rand_col = rand(0...@size)
+                rand_pos = [rand_row, rand_col]
+                while self.empty_position?(rand_pos)
                     card = Card.new(value,"face_down")
                     @grid[rand_row][rand_col] = card
                 end
-                print @grid
             end
+    end
+
+    def render
+       @grid.each do |row|
+        row.each do |card|
+            card.face_value
         end
+        puts "-----"
+    end
     end
 
     def [](pos)
@@ -48,7 +53,7 @@ class Board
     end
 
     def empty_position?(pos)
-        if @grid[pos[0]][pos[1]] == ""
+        if @grid[pos[0]][pos[1]].is_a?(String)
             return true
         end
         false
@@ -58,7 +63,7 @@ class Board
         full = true
         @grid.each do |row|
             row.each do |ele|
-                if ele == ""
+                if ele.is_a?(String)
                     full = false
                 end
             end

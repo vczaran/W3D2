@@ -27,14 +27,14 @@ class Card
         @status = "face_up"
     end
 
-    def ==(card)
-       card.reveal
-       self.reveal
-      unless card.face_value == self.face_value
-        card.hide 
-        self.hide
-      end
-    end
+    # def ==(card)
+    #    card.reveal
+    #    self.reveal
+    #   unless card.face_value == self.face_value
+    #     card.hide 
+    #     self.hide
+    #   end
+    # end
 
 
 
