@@ -15,6 +15,7 @@ class Game
     def play
        @game_board.populate
        until @game_board.won?
+        system("clear")
         @game_board.render
         guessed_pos = HumanPlayer.get_input
         make_guess(guessed_pos)
@@ -42,6 +43,7 @@ class Game
                 end
                 @previous_guess = nil
             end
+            sleep(3)
         end
     end
 
