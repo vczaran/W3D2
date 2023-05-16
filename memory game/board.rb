@@ -1,22 +1,28 @@
+require_relative "card"
+require "byebug"
 class Board
     
     def initialize()
         @size = 4
-        @grid = Array.new(4){Array.new(4), ""}
+        @grid = Array.new(4){Array.new(4, "")}
     end
 
+    attr_reader :grid
+
     def populate
-        @alpha = (a..z).to_a
+        @alpha = ("a".."z").to_a
         (@size * @size / 2).times do |i|
-            value = @alpha.rand
-            rand_row = (0...@size).rand
-            rand_col = (0...@size).rand
-            rand_pos = [rand_row][rand_col]
-            
+            value = @alpha.sample
+            rand_row = rand(0...@size)
+            rand_col = rand(0...@size)
+            rand_pos = [rand_row, rand_col]
+           
             2.times do
-                if self.valid_position(rand_pos) && self.empty_position(rand_pos)
+                # if self.valid_position?(rand_pos) && 
+                until self.empty_position?(rand_pos)
                     card = Card.new(value,"face_down")
-                    @grid[rand_pos] = card
+                    debugger
+                    @grid[rand_row][rand_col] = card
                 end
             end
         end
