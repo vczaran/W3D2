@@ -1,18 +1,21 @@
 require_relative "board"
 require_relative "card"
+require_relative "human_player"
 
-
+require "byebug"
 class Game
   
     def initialize( previous_guess = [])
-        @board = Board.new
+        @game_board = Board.new
         @previous_guess = previous_guess
     end
 
+    attr_reader :board
 
     def play
-       until @board.won?
-        @board.render
+       @game_board.populate
+       until @game_board.won?
+        @game_board.render
         guessed_pos = HumanPlayer.get_input
         make_guess(guessed_pos)
        end
@@ -20,7 +23,7 @@ class Game
     end
 
     def make_guess(pos)
-       card = @board[pos[0]][pos[1]]
+       card = @game_board[pos[0]][pos[1]]
        debugger
         unless card.face_up?
             card.reveal

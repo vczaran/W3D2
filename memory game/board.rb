@@ -1,5 +1,5 @@
 require_relative "card"
-require "byebug"
+
 class Board
     
     def initialize()
@@ -85,7 +85,7 @@ class Board
 
     def won?
       @grid.all? do |row|
-        row.all? { |ele| ele.face_up? }
+        row.all? { |card| card.face_up? }
       end
     end
 
