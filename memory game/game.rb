@@ -23,10 +23,12 @@ class Game
     end
 
     def make_guess(pos)
-       card = @game_board[pos[0]][pos[1]]
-       debugger
+        row = pos[0]
+        col = pos[1]
+        card = @game_board.grid[row][col]
         unless card.face_up?
             card.reveal
+            puts "your card is #{card.face_value}"
             if @previous_guess == []
                 @previous_guess = card
             else
@@ -34,6 +36,7 @@ class Game
                     @previous_guess.hide
                     card.hide
                 end
+                @previous_guess = []
             end
         end
     end
