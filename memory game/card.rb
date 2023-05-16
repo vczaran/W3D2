@@ -14,7 +14,7 @@ class Card
         return @face_value
         true
       else
-        return false
+        return "?"
       end
     end
 

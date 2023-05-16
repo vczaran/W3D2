@@ -13,13 +13,17 @@ class Board
         @alpha = ("a".."z").to_a
       
            until self.full?
-                rand_row = rand(0...@size)
                 value = @alpha.sample
-                rand_col = rand(0...@size)
-                rand_pos = [rand_row, rand_col]
-                while self.empty_position?(rand_pos)
-                    card = Card.new(value,"face_down")
-                    @grid[rand_row][rand_col] = card
+                pair = 0
+                while pair < 2
+                    rand_row = rand(0...@size)
+                    rand_col = rand(0...@size)
+                    rand_pos = [rand_row, rand_col]
+                    if self.empty_position?(rand_pos)
+                        card = Card.new(value,"face_down")
+                        @grid[rand_row][rand_col] = card
+                        pair += 1
+                    end
                 end
             end
     end
@@ -27,9 +31,9 @@ class Board
     def render
        @grid.each do |row|
         row.each do |card|
-            card.face_value
+           print card.face_value + " "
         end
-        puts "-----"
+        puts 
     end
     end
 
